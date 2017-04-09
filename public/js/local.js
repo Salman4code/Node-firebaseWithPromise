@@ -43,9 +43,16 @@ $(document).ready(function() {
         console.log(response.status);
         if(response.status==false)
         {
-          console.log(response.message[0]);
-          $("#error").remove();
-          $("#login1").after('<p id="error" style="color:red;">'+response.message[0].msg+'</p>');
+          if(response.message=="Unauthorised User" || response.message=="Email id is not Registered")
+          {
+            console.log(response.message);
+            $("span").remove();
+            $("#login1").after('<p style="margin-left:15%;"><span id="error" style="color:red;">'+response.message+'</span>');
+            return;
+          }
+          console.log(response.message[0].msg);
+          $("span").remove();
+          $("#login1").after('<p style="margin-left:15%;"><span id="error" style="color:red;">'+response.message[0].msg+'</span>');
         }
         else
         {
@@ -88,7 +95,7 @@ $(document).ready(function() {
       welcomepage();
     }else{
       $('span').remove();
-      $('#email_id').after('<span style="color:red;">'+response.message+'</span><br>');
+      $('#email_id').after('<p style="margin-left:15%;"><span style="color:red;">'+response.message+'</span></p>');
       console.log(response.message);
     }
     },
@@ -157,48 +164,48 @@ function validateinput(signup)
   console.log(typeof(Username));
   if (Username =="" || typeof(Username) !== 'string') {
    $('span').remove();
-   $('#name').after('<span style="color:red;">'+"Please Enter name<br>"+'</span>');
+   $('#name').after('<p style="margin-left:15%;"><span style="color:red;">'+"Please Enter name"+'</span><p>');
     return false;
 
   }
   else if(Useremail==""||Useremail==undefined || Useremail==null){
      $('span').remove();
-     $('#email_id').after('<span style="color:red;">'+"Please Enter email_id<br>"+'</span>');
+     $('#email_id').after('<p style="margin-left:15%;"><span style="color:red;">'+"Please Enter email_id"+'</span></p>');
      return false;
   }
   else if (!emailregex.test(Useremail)) {
 
     $('span').remove();
-   $('#email_id').after('<span style="color:red;">'+"Please Enter valid email_id<br>"+'</span>');
+   $('#email_id').after('<p style="margin-left:15%;"><span style="color:red;">'+"Please Enter valid email_id"+'</span></p>');
     return false;
 
   }
   else if (Usermobile=="" || Usermobile==undefined || Usermobile==null) {
     $('span').remove();
-   $('#mobile_no').after('<span style="color:red;">'+"Please Enter Mobile Number<br>"+'</span>');
+   $('#mobile_no').after('<p style="margin-left:15%;"><span style="color:red;">'+"Please Enter Mobile Number"+'</span></p>');
     return false;
   }
   else if (!mobileregex.test(Usermobile)) {
     $('span').remove();
-   $('#mobile_no').after('<span style="color:red;">'+"Mobile Number is not valid<br>"+'</span>');
+   $('#mobile_no').after('<p style="margin-left:15%;"><span style="color:red;">'+"Mobile Number is not valid"+'</span></p>');
     return false;
   }
   else if (password=="" || password == undefined || password== null) {
 
     $('span').remove();
-   $('#Password').after('<span style="color:red;">'+"Please Enter password<br>"+'</span>');
+   $('#Password').after('<p style="margin-left:15%;"><span style="color:red;">'+"Please Enter password"+'</span></p>');
     return false;
 
   }
   else if (!passwordregex.test(password)) {
     $('span').remove();
-    $('#Password').after('<span style="color:red;">'+"Minimum 8 characters at least 1 Alphabet, 1 Number and 1 Special Character"+'</span>');
+    $('#Password').after('<p style="margin-left:15%;"><span style="color:red;">'+"Minimum 8 characters at least 1 Alphabet, 1 Number and 1 Special Character"+'</span></p>');
     return false;
 
   } else if (password != rPassword) {
 
         $('span').remove();
-       $('#rPassword').after('<span style="color:red;">'+"Password does not match<br>"+'</span>');
+       $('#rPassword').after('<p style="margin-left:15%;"><span style="color:red;">'+"Password does not match<br>"+'</span></p>');
     return false;
 
   }
